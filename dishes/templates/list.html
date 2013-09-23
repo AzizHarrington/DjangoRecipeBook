@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Recipe Locker {% endblock %}
+
+{% block content %}
+<h1> Recipes: </h1>
+{% for dish in dishes %}
+<h2>{{ dish.name }}</h2>
+<ul>
+    <li>Prep-time: {{ dish.prep_time }}</li>
+    <li>Cuisine: {{ dish.cuisine }}</li>
+    <li>Flavors: {{ dish.flavors }}</li>
+    <li>Ingredients:</li>
+    <ul>
+        {% for ingredient in dish.ingredients.all %}
+        <li>{{ingredient}}</li>
+        {% endfor %}
+    </ul>
+</ul>
+<p>Comments:</p>
+<p>{{ dish.comments }}</p>
+{% endfor %}
+{% endblock %}

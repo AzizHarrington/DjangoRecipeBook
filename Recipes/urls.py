@@ -1,8 +1,9 @@
 from django.conf.urls import patterns, include, url
+from dishes.views import Home, List, Detail, New, Edit, Delete
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,5 +14,11 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', Home.as_view()),
+    url(r'^list/', List.as_view()),
+    url(r'^detail/(?P<pk>\d+)$', Detail.as_view()),
+    url(r'^new/', New.as_view()),
+    url(r'^edit/(?P<pk>\d+)$', Edit.as_view()),
+    url(r'^delete/(?P<pk>\d+)$', Delete.as_view()),
 )
