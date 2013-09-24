@@ -1,6 +1,6 @@
 from django.views.generic.base import View
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .models import Dish, Ingredient
 
@@ -24,7 +24,20 @@ class Detail(View):
 
 
 class New(View):
-    pass
+    def get(self, request, *args, **kwargs):
+        return render(request, 'new.html')
+    def post(self, request, *args, **kwargs):
+        dish = Dish(name=request.POST.get('name'),
+                    cuisine=request.POST.get('cuisine'),
+                    flavors=request.POST.get('flavors'),
+                    prep_time=request.POST.get('prep_time'),
+                    comments=request.POST.get('comments'))
+        dish.save()
+        ingredient = Ingredient(name=request.POST.get('ingredients'))
+        ingredient.save()
+        dish.ingredients.add(ingredient)
+
+        return redirect('/list/')
 
 
 class Edit(View):

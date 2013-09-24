@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Enter a New Recipe</h2>
+<hr>
+
+<form role="form" action="." method="post">{% csrf_token %}
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Enter Dish Name">
+    </div>
+    <div class="form-group">
+        <label for="cuisine">Cuisine</label>
+        <input type="text" class="form-control" name="cuisine" placeholder="Enter Cuisine Type (Chinese, Mexican, Southern, etc.)">
+    </div>
+    <div class="form-group">
+        <label for="flavors">Flavors</label>
+        <input type="text" class="form-control" name="flavors" placeholder="Enter flavors (sweet, savory, sour, etc.)">
+    </div>
+    <div class="form-group">
+        <label for="ingredients">Ingredients</label>
+        <input type="text" class="form-control" name="ingredients" placeholder="Enter the ingredients">
+    </div>
+    <div class="form-group">
+        <label for="prep_time">Prep Time</label>
+        <input type="text" class="form-control" name="prep_time" placeholder="Enter minutes to complete">
+    </div>
+    <div class="form-group">
+        <label for="comments">Comments</label>
+        <input type="text" class="form-control" name="comments" placeholder="Enter comments">
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+{% endblock %}
