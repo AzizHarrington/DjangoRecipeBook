@@ -18,7 +18,9 @@ class List(View):
 
 
 class Detail(View):
-    pass
+    def get(self, request, pk):
+        dish = Dish.objects.get(pk=pk)
+        return render(request, 'detail.html', {'dish': dish})
 
 
 class New(View):
