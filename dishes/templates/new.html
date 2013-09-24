@@ -18,9 +18,17 @@
         <label for="flavors">Flavors</label>
         <input type="text" class="form-control" name="flavors" placeholder="Enter flavors (sweet, savory, sour, etc.)">
     </div>
-    <div class="form-group">
+<!--     <div class="form-group">
         <label for="ingredients">Ingredients</label>
         <input type="text" class="form-control" name="ingredients" placeholder="Enter the ingredients">
+    </div> -->
+    <div class="form-group">
+        <label for="ingredients">Ingredients</label>
+        <select multiple class="form-control" name="ingredients">
+            {% for ingredient in ingredients %}
+            <option value="{{ ingredient.pk }}">{{ ingredient.name }}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
         <label for="prep_time">Prep Time</label>
@@ -34,4 +42,21 @@
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script>
+$(function())
+    var availableTags = [
+        {% for ingredient in ingredients %}
+        "{{ ingredient.name }}",
+        {% endfor %}
+    ];
+    $( "#tags" ).autocomplete({
+        source: availableTags
+    });
+});
+</script>
+
 {% endblock %}
+
+
