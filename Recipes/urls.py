@@ -15,10 +15,10 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', Home.as_view()),
-    url(r'^list/', List.as_view()),
-    url(r'^detail/(?P<pk>\d+)$', Detail.as_view()),
-    url(r'^new/', New.as_view()),
-    url(r'^edit/(?P<pk>\d+)$', Edit.as_view()),
-    url(r'^delete/(?P<pk>\d+)$', Delete.as_view()),
+    url(r'^$', Home.as_view(), name="home"),
+    url(r'^list/', List.as_view(), name="list"),
+    url(r'^detail/(?P<pk>\d+)$', Detail.as_view(), name="detail"),
+    url(r'^new/', New.as_view(), name="new"),
+    url(r'^edit/(?P<pk>\d+)$', Edit.as_view(), name="edit"),
+    url(r'^delete/(?P<pk>\d+)$', Delete.as_view(), name="edit"),
 )

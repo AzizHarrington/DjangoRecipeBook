@@ -7,7 +7,8 @@ from .models import Dish, Ingredient
 #Home, List, Detail, New, Edit, Delete
 
 class Home(View):
-    pass
+    def get(self, request):
+        return render(request, 'front.html')
 
 
 class List(View):
