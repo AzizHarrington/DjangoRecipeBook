@@ -32,11 +32,23 @@ class New(View):
                     cuisine=request.POST.get('cuisine'),
                     flavors=request.POST.get('flavors'),
                     prep_time=request.POST.get('prep_time'),
-                    comments=request.POST.get('comments'))
+                    comments=request.POST.get('comments'),
+                )
         dish.save()
-        ingredient = Ingredient(name=request.POST.get('ingredients'))
-        ingredient.save()
-        dish.ingredients.add(ingredient)
+        num = 1
+        ingredients = []
+        while True:
+            if 'ingredient%s' % num in request.POST:
+                ing = request.POST.get('ingredient%s' % num)
+                ingredients.append(ing)
+                num += 1
+            else:
+                break
+
+        for ingredient in ingredients:
+            p = Ingredient(name=ingredient)
+            p.save()
+            dish.ingredients.add(p)
 
         return redirect('/list/')
 

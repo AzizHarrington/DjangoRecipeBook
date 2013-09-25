@@ -18,45 +18,56 @@
         <label for="flavors">Flavors</label>
         <input type="text" class="form-control" name="flavors" placeholder="Enter flavors (sweet, savory, sour, etc.)">
     </div>
-<!--     <div class="form-group">
-        <label for="ingredients">Ingredients</label>
-        <input type="text" class="form-control" name="ingredients" placeholder="Enter the ingredients">
-    </div> -->
-    <div class="form-group">
-        <label for="ingredients">Ingredients</label>
-        <select multiple class="form-control" name="ingredients">
-            {% for ingredient in ingredients %}
-            <option value="{{ ingredient.pk }}">{{ ingredient.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
     <div class="form-group">
         <label for="prep_time">Prep Time</label>
         <input type="text" class="form-control" name="prep_time" placeholder="Enter minutes to complete">
     </div>
+    <br>
+    <div class="form-group">
+        <button type="button" class="btn btn-success" id="addIngredient">Add Ingredients</button>
+    </div>
+    <br>
     <div class="form-group">
         <label for="comments">Comments</label>
-        <input type="text" class="form-control" name="comments" placeholder="Enter comments">
+        <textarea type="text" class="form-control" name="comments" placeholder="Enter comments"></textarea>
     </div>
-
-    <button type="submit" class="btn btn-default">Submit</button>
+<!--     <div class="checkbox">
+      <label>
+        <input type="checkbox" name="new">
+        This is a recipe I plan on making for the first time.
+      </label>
+    </div> -->
+    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
 </form>
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
 <script>
-$(function())
-    var availableTags = [
-        {% for ingredient in ingredients %}
-        "{{ ingredient.name }}",
-        {% endfor %}
-    ];
-    $( "#tags" ).autocomplete({
-        source: availableTags
-    });
+//create three initial fields
+var startingNo = -1;
+var $node = "";
+for (varCount=0; varCount<=startingNo; varCount++){
+    var displayCount = varCount+1;
+    $node += '<div class="form-group"><label for="ingredient">Ingredient '+displayCount+': </label><input type="text" class="form-control" name="ingredient'+displayCount+'" placeholder="Enter Ingredient Name"><button type="button" class="btn btn-danger" id="removeVar">Remove Ingredient</button></div>';
+}
+//add them to the DOM
+$('form').append($node);
+//remove a textfield
+$('form').on('click', '#removeVar', function(){
+    $(this).parent().remove();
+    //varCount--;
+});
+//add a new node
+$('#addIngredient').on('click', function(){
+    //new node
+    varCount++;
+    $node = '<div class="form-group"><label for="ingredient">Ingredient '+varCount+': </label><input type="text" class="form-control" name="ingredient'+varCount+'" placeholder="Enter Ingredient Name"><button type="button" class="btn btn-danger" id="removeVar">Remove Ingredient</button></div>'
+    $(this).parent().before($node);
 });
 </script>
-
 {% endblock %}
 
 
