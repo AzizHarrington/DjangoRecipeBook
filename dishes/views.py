@@ -39,8 +39,8 @@ class New(View):
         ingredients = []
         while True:
             if 'ingredient%s' % num in request.POST:
-                ing = request.POST.get('ingredient%s' % num)
-                ingredients.append(ing)
+                ingredient = request.POST.get('ingredient%s' % num)
+                ingredients.append(ingredient)
                 num += 1
             else:
                 break
@@ -54,9 +54,11 @@ class New(View):
 
 
 class Edit(View):
-    pass
+    def get(self, request, *args, **kwargs):
+        return render(request, "edit.html")
 
 
 class Delete(View):
-    pass
+    def get(self, request, *args, **kwargs):
+        return render(request, "delete.html")
 
