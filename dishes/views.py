@@ -25,8 +25,7 @@ class Detail(View):
 
 class New(View):
     def get(self, request, *args, **kwargs):
-        ingredients = Ingredient.objects.all()
-        return render(request, 'new.html', {'ingredients': ingredients})
+        return render(request, 'new.html')
     def post(self, request, *args, **kwargs):
         dish = Dish(name=request.POST.get('name'),
                     cuisine=request.POST.get('cuisine'),
@@ -54,8 +53,9 @@ class New(View):
 
 
 class Edit(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, "edit.html")
+    def get(self, request, pk):
+        dish = Dish.objects.get(pk=pk)
+        return render(request, "edit.html", {"dish":dish})
 
 
 class Delete(View):
