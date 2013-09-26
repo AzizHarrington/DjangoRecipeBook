@@ -24,8 +24,9 @@ class Detail(View):
 
 
 class New(View):
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         return render(request, 'new.html')
+
     def post(self, request, *args, **kwargs):
         dish = Dish(name=request.POST.get('name'),
                     cuisine=request.POST.get('cuisine'),
@@ -36,6 +37,7 @@ class New(View):
         dish.save()
         num = 1
         ingredients = []
+        #find arbitrary number of ingredients added by user and append to ingredients
         while True:
             if 'ingredient%s' % num in request.POST:
                 ingredient = request.POST.get('ingredient%s' % num)
@@ -43,12 +45,11 @@ class New(View):
                 num += 1
             else:
                 break
-
+        #save all ingredients and add to dish
         for ingredient in ingredients:
             p = Ingredient(name=ingredient)
             p.save()
             dish.ingredients.add(p)
-
         return redirect('/list/')
 
 
@@ -56,6 +57,9 @@ class Edit(View):
     def get(self, request, pk):
         dish = Dish.objects.get(pk=pk)
         return render(request, "edit.html", {"dish":dish})
+
+    def post(self, request, *args, **kwargs):
+        pass
 
 
 class Delete(View):
