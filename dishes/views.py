@@ -35,7 +35,7 @@ class New(View):
                     comments=request.POST.get('comments'),
                 )
         dish.save()
-        
+
         for ingredient in request.POST.getlist('ingredient'):
             p = Ingredient(name=ingredient)
             p.save()
@@ -73,3 +73,8 @@ class Delete(View):
         dish = Dish.objects.get(pk=pk)
         return render(request, "delete.html", {"dish": dish})
 
+    def post(self, request, pk):
+        dish = Dish.objects.get(pk=pk)
+        dish.ingredients.all().delete()
+        dish.delete()
+        return redirect('/list/')

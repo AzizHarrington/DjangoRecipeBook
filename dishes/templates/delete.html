@@ -3,9 +3,14 @@
 {% block extra_options %}
 
 <h3> Warning!!! <h3>
-<h4> Are you sure you want to delete <em>"{{ dish.name }}"</em> ?</h4>
+<h3> Are you sure you want to delete <em>"{{ dish.name }}"</em> ?</h3>
+<br>
+<h4><a href="/detail/{{ dish.pk }}/"> No, take me back. </a></h4>
+<hr>
+<form action="{{ dish.pk }}" method="post">{% csrf_token %}
+    <h4> Yes, I never want to see this recipe again! (Ever) </h4>
+    <button type="submit" class="btn btn-danger">Delete</button>
+<form>
 
-<h4> Yes </h4>
-<h4> No </h4>
 
 {% endblock %}
