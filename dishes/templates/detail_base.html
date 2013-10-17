@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ dish.name }}</h2>
+<hr>
+<table class="table table-bordered">
+    <tr>
+        <td><strong>Cuisine</strong></td>
+        <td>{{ dish.cuisine }}</td>
+    </tr>
+    <tr>
+        <td><strong>Flavors</strong></td>
+        <td>{{ dish.flavors }}</td>
+    </tr>
+    <tr>
+        <td><strong>Ingredients</strong></td>
+        <td>
+            {% for ingredient in dish.ingredients.all %}
+            {{ ingredient }},
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td><strong>Prep time</strong></td>
+        <td>{{ dish.prep_time }} mins</td>
+    </tr>
+    <tr>
+        <td><strong>Comments</strong></td>
+        <td>{{ dish.comments }}</td>
+    </tr>
+</table>
+
+{% block extra_options %}
+{% endblock %}
+
+{% endblock %}
