@@ -1,1 +1,11 @@
-{% extends "base.html" %}
+{% extends "detail_base.html" %}
+
+{% block extra_options %}
+
+<h3> Warning!!! <h3>
+<h4> Are you sure you want to delete <em>"{{ dish.name }}"</em> ?</h4>
+
+<h4> Yes </h4>
+<h4> No </h4>
+
+{% endblock %}

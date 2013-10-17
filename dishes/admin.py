@@ -5,9 +5,10 @@ from .models import Dish, Ingredient
 
 class DishAdmin(admin.ModelAdmin):
     pass
+admin.site.register(Dish, DishAdmin)  
+
+  
 
 class IngredientAdmin(admin.ModelAdmin):
     pass
-
-admin.site.register(Dish, DishAdmin)
 admin.site.register(Ingredient, IngredientAdmin)

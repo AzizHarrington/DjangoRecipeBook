@@ -27,7 +27,7 @@ class New(View):
     def get(self, request):
         return render(request, 'new.html')
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         dish = Dish(name=request.POST.get('name'),
                     cuisine=request.POST.get('cuisine'),
                     flavors=request.POST.get('flavors'),
@@ -35,21 +35,12 @@ class New(View):
                     comments=request.POST.get('comments'),
                 )
         dish.save()
-        num = 1
-        ingredients = []
-        #find arbitrary number of ingredients added by user and append to ingredients
-        while True:
-            if 'ingredient%s' % num in request.POST:
-                ingredient = request.POST.get('ingredient%s' % num)
-                ingredients.append(ingredient)
-                num += 1
-            else:
-                break
-        #save all ingredients and add to dish
-        for ingredient in ingredients:
+        
+        for ingredient in request.POST.getlist('ingredient'):
             p = Ingredient(name=ingredient)
             p.save()
             dish.ingredients.add(p)
+
         return redirect('/list/')
 
 
@@ -58,11 +49,27 @@ class Edit(View):
         dish = Dish.objects.get(pk=pk)
         return render(request, "edit.html", {"dish":dish})
 
-    def post(self, request, *args, **kwargs):
-        pass
+    def post(self, request, pk):
+        dish = Dish.objects.get(pk=pk)
+
+        dish.name=request.POST.get('name')
+        dish.cuisine=request.POST.get('cuisine')
+        dish.flavors=request.POST.get('flavors')
+        dish.prep_time=request.POST.get('prep_time')
+        dish.comments=request.POST.get('comments')
+        dish.save()
+
+        dish.ingredients.all().delete()
+        for ingredient in request.POST.getlist('ingredient'):
+            p = Ingredient(name=ingredient)
+            p.save()
+            dish.ingredients.add(p)
+
+        return redirect('/detail/%s' % pk)
 
 
 class Delete(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, "delete.html")
+    def get(self, request, pk):
+        dish = Dish.objects.get(pk=pk)
+        return render(request, "delete.html", {"dish": dish})
 
