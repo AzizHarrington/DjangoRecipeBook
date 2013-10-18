@@ -1,10 +1,11 @@
 from django.views.generic.base import View
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 
 from .models import Dish, Ingredient
 
-#Home, List, Detail, New, Edit, Delete
+
 
 class Home(View):
     def get(self, request):
@@ -41,7 +42,7 @@ class New(View):
             p.save()
             dish.ingredients.add(p)
 
-        return redirect('/list/')
+        return redirect(render('list'))
 
 
 class Edit(View):
@@ -65,7 +66,7 @@ class Edit(View):
             p.save()
             dish.ingredients.add(p)
 
-        return redirect('/detail/%s' % pk)
+        return redirect(reverse('detail', args=(pk,)))
 
 
 class Delete(View):
@@ -77,4 +78,4 @@ class Delete(View):
         dish = Dish.objects.get(pk=pk)
         dish.ingredients.all().delete()
         dish.delete()
-        return redirect('/list/')
+        return redirect(render('list'))

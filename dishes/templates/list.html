@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>My Recipes</h2>
-<p><a href="/new/">Create New</a></p>
+<p><a href="{% url 'new' %}">Create New</a></p>
 <hr>
 <table class="table table-hover table-bordered">
     {% for dish in dishes %}
