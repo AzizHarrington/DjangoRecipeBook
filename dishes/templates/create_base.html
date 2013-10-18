@@ -7,9 +7,9 @@
 <hr>
 
 {% if dish.pk %}
-<form role="form" action="./{{ dish.pk }}" method="post">{% csrf_token %}
+<form role="form" action="{% url 'edit' dish.pk %}" method="post">{% csrf_token %}
 {% else %}
-<form role="form" action="." method="post">{% csrf_token %}
+<form role="form" action="{% url 'new' %}" method="post">{% csrf_token %}
 {% endif %}
     <div class="form-group">
         <label for="name">Name</label>

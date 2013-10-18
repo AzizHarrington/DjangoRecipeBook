@@ -42,7 +42,7 @@ class New(View):
             p.save()
             dish.ingredients.add(p)
 
-        return redirect(render('list'))
+        return redirect(reverse('list'))
 
 
 class Edit(View):
@@ -78,4 +78,4 @@ class Delete(View):
         dish = Dish.objects.get(pk=pk)
         dish.ingredients.all().delete()
         dish.delete()
-        return redirect(render('list'))
+        return redirect(reverse('list'))
