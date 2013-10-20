@@ -1,37 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{{ dish.name }}</h2>
-{% if dish.photo %}
-    <p><img src="/media/{{ dish.photo }}" width="250"/></p>
-{% endif %}
-<hr>
-<table class="table table-bordered">
-    <tr>
-        <td><strong>Cuisine</strong></td>
-        <td>{{ dish.cuisine }}</td>
-    </tr>
-    <tr>
-        <td><strong>Flavors</strong></td>
-        <td>{{ dish.flavors }}</td>
-    </tr>
-    <tr>
-        <td><strong>Ingredients</strong></td>
-        <td>
-            {% for ingredient in dish.ingredients.all %}
-            {{ ingredient }},
-            {% endfor %}
-        </td>
-    </tr>
-    <tr>
-        <td><strong>Prep time</strong></td>
-        <td>{{ dish.prep_time }} mins</td>
-    </tr>
-    <tr>
-        <td><strong>Comments</strong></td>
-        <td>{{ dish.comments }}</td>
-    </tr>
-</table>
+<div>
+    <h2>{{ dish.name }}</h2>
+    <hr>
+    {% if dish.photo %}
+        <p><img src="/media/{{ dish.photo }}" width="250"/></p>
+    {% endif %}
+    <p>Created by {{ dish.author }}</p>
+
+    <p>{{ dish.likes }} people liked this recipe</p>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <td><strong>Cuisine</strong></td>
+            <td>{{ dish.cuisine }}</td>
+        </tr>
+        <tr>
+            <td><strong>Flavors</strong></td>
+            <td>{{ dish.flavors }}</td>
+        </tr>
+        <tr>
+            <td><strong>Ingredients</strong></td>
+            <td>
+                {% for ingredient in dish.ingredients.all %}
+                {{ ingredient }},
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Prep time</strong></td>
+            <td>{{ dish.prep_time }} mins</td>
+        </tr>
+        <tr>
+            <td><strong>Comments</strong></td>
+            <td>{{ dish.comments }}</td>
+        </tr>
+    </table>
+</div>
 
 {% block extra_options %}
 {% endblock %}

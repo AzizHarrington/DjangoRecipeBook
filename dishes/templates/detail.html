@@ -1,6 +1,5 @@
 {% extends "detail_base.html" %}
 
 {% block extra_options %}
-<p><a href="{% url 'edit' dish.pk %}">Edit this recipe</a></p>
-<p><a href="{% url 'delete' dish.pk %}">Delete this recipe</a></p>
+<p><a href="{% url 'edit' dish.pk %}">Edit</a> | <a href="{% url 'delete' dish.pk %}">Delete this recipe</a></p>
 {% endblock %}
