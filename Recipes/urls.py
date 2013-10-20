@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)), 
     url(r'^$', home, name="home"), 
     url(r'^recipes/', include('dishes.urls')),
+    url(r'^accounts/', include('accounts.urls')),
 )
 
 if settings.DEBUG:
