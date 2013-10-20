@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from dishes.views import Home
+from dishes.views import home
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -15,6 +15,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)), 
-    url(r'^$', Home.as_view(), name="home"), 
+    url(r'^$', home, name="home"), 
     url(r'^recipes/', include('dishes.urls')),
 )

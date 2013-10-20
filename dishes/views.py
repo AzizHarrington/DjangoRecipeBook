@@ -1,81 +1,59 @@
-from django.views.generic.base import View
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 
 from .models import Dish, Ingredient
+from .forms import DishForm
 
 
 
-class Home(View):
-    def get(self, request):
-        return render(request, 'front.html')
+def home(request):
+    return render(request, 'front.html')
 
 
-class List(View):
-    def get(self, request):
-        dishes = Dish.objects.all()
-        return render(request, 'list.html', {'dishes': dishes})
+def list_view(request):
+    dishes = Dish.objects.all()
+    return render(request, 'list.html', {'dishes': dishes})
 
 
-class Detail(View):
-    def get(self, request, pk):
-        dish = Dish.objects.get(pk=pk)
-        return render(request, 'detail.html', {'dish': dish})
+def detail(request, pk):
+    dish = Dish.objects.get(pk=pk)
+    return render(request, 'detail.html', {'dish': dish})
 
 
-class New(View):
-    def get(self, request):
-        return render(request, 'new.html')
+def new(request):
+    if request.method == "POST":
+        form = DishForm(request.POST)
+        if form.is_valid():
+            form.save()
 
-    def post(self, request):
-        dish = Dish(name=request.POST.get('name'),
-                    cuisine=request.POST.get('cuisine'),
-                    flavors=request.POST.get('flavors'),
-                    prep_time=request.POST.get('prep_time'),
-                    comments=request.POST.get('comments'),
-                )
-        dish.save()
-
-        for ingredient in request.POST.getlist('ingredient'):
-            p = Ingredient(name=ingredient)
-            p.save()
-            dish.ingredients.add(p)
-
-        return redirect(reverse('list'))
+            return redirect(reverse('list'))
+    else:
+        form = DishForm()
+    return render(request, 'new.html', {'form': form})
 
 
-class Edit(View):
-    def get(self, request, pk):
-        dish = Dish.objects.get(pk=pk)
-        return render(request, "edit.html", {"dish":dish})
 
-    def post(self, request, pk):
-        dish = Dish.objects.get(pk=pk)
-
-        dish.name=request.POST.get('name')
-        dish.cuisine=request.POST.get('cuisine')
-        dish.flavors=request.POST.get('flavors')
-        dish.prep_time=request.POST.get('prep_time')
-        dish.comments=request.POST.get('comments')
-        dish.save()
-
-        dish.ingredients.all().delete()
-        for ingredient in request.POST.getlist('ingredient'):
-            p = Ingredient(name=ingredient)
-            p.save()
-            dish.ingredients.add(p)
-
-        return redirect(reverse('detail', args=(pk,)))
+def edit(request, pk):
+    dish = Dish.objects.get(pk=pk)
+    if request.method == "POST":
+        form = DishForm(request.POST, instance=dish)
+        if form.is_valid():
+            d = form.save(commit=False)
+            d.save()
+            return redirect(reverse('detail', args=(pk, )))
+    else:
+        form = DishForm(instance=dish)
+    return render(request, "edit.html", {"form": form, "dish": dish})
 
 
-class Delete(View):
-    def get(self, request, pk):
-        dish = Dish.objects.get(pk=pk)
-        return render(request, "delete.html", {"dish": dish})
 
-    def post(self, request, pk):
-        dish = Dish.objects.get(pk=pk)
+
+def delete(request, pk):
+    dish = Dish.objects.get(pk=pk)
+    if request.method == "POST":
         dish.ingredients.all().delete()
         dish.delete()
         return redirect(reverse('list'))
+    return render(request, "delete.html", {"dish": dish})
+
+

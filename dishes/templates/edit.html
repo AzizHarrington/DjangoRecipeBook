@@ -1,5 +1,13 @@
-{% extends "create_base.html" %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-{% block heading %}
+{% block content %}
+
 <h2>Edit {{ dish.name }}</h2>
+
+<form role="form" action="{% url 'edit' dish.pk %}" method="post">{% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary btn-lg">Save Recipe</button>
+</form>
+
 {% endblock %}

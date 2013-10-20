@@ -129,7 +129,10 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'dishes',
     'south',
+    'crispy_forms',
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
