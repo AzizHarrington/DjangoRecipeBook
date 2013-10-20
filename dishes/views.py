@@ -22,7 +22,7 @@ def detail(request, pk):
 
 def new(request):
     if request.method == "POST":
-        form = DishForm(request.POST)
+        form = DishForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
 
@@ -36,7 +36,7 @@ def new(request):
 def edit(request, pk):
     dish = Dish.objects.get(pk=pk)
     if request.method == "POST":
-        form = DishForm(request.POST, instance=dish)
+        form = DishForm(request.POST, request.FILES, instance=dish)
         if form.is_valid():
             d = form.save(commit=False)
             d.save()

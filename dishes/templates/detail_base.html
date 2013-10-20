@@ -2,6 +2,9 @@
 
 {% block content %}
 <h2>{{ dish.name }}</h2>
+{% if dish.photo %}
+    <p><img src="/media/{{ dish.photo }}" width="250"/></p>
+{% endif %}
 <hr>
 <table class="table table-bordered">
     <tr>
