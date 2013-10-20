@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     url(r'^invalid/$', 'accounts.views.invalid_login', name='invalid'),
     url(r'^logout/$', 'accounts.views.logout', name='logout'),
     url(r'^register/$', 'accounts.views.register_user', name='register'),
-    url(r'^success/$', 'accounts.views.register_user', name='success'),
+    url(r'^success/$', 'accounts.views.register_success', name='success'),
 )
