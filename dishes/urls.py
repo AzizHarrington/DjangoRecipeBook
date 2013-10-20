@@ -1,6 +1,11 @@
 from django.conf.urls import patterns, include, url
-from dishes.views import list_view, detail, new, edit, delete
 from django.contrib.auth.decorators import login_required
+
+from .views import list_view, detail, new, edit, delete
+from .api import RecipeResource
+
+recipe_resource = RecipeResource()
+
 
 urlpatterns = patterns('',
     url(r'^list/?', list_view, name="list"),
@@ -8,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^new/?', login_required(new), name="new"),
     url(r'^edit/(?P<pk>\d+)/?$', login_required(edit), name="edit"),
     url(r'^delete/(?P<pk>\d+)/?$', login_required(delete), name="delete"), 
+    url(r'^api/', include(recipe_resource.urls)),
 )
