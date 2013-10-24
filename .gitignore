@@ -2,3 +2,5 @@
 Recipes/settings/local.py
 extras/*
 media/*
+.coverage
+htmlcov/*
