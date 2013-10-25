@@ -21,7 +21,7 @@ class Ingredient(models.Model):
 class Dish(models.Model):
     name = models.CharField(max_length=200)
     author = models.ForeignKey(User, null=True)
-    photo = models.FileField(upload_to=get_upload_file_name, null=True)
+    photo = models.FileField(upload_to=get_upload_file_name, null=True, blank=True)
     cuisine = models.CharField(max_length=200)
     flavors = models.CharField(max_length=200)
     ingredients = models.ManyToManyField(Ingredient)
