@@ -5,7 +5,7 @@
     <h2>{{ dish.name }}</h2>
     <hr>
     {% if dish.photo %}
-        <p><img src="/media/{{ dish.photo }}" alt="{{ dish.name }}" class="img-rounded" width="500"/></p>
+        <p><img src="{{ MEDIA_URL }}{{ dish.photo }}" alt="{{ dish.name }}" class="img-rounded" width="500"/></p>
     {% endif %}
     <p>Created by {{ dish.author }}</p>
 
