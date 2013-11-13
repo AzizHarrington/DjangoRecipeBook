@@ -4,3 +4,4 @@ extras/*
 media/*
 .coverage
 htmlcov/*
+Recipes/settings/secret.py
