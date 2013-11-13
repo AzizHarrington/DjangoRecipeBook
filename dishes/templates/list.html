@@ -6,17 +6,20 @@
 <h2>My Recipes</h2>
 <p><a href="{% url 'new' %}">Create New</a></p>
 <hr>
-<table class="table table-hover table-bordered">
-    <tr>
-        <th>Likes</th>
-        <th>Name</th>
-    </tr>
-    {% for dish in dishes %}
-    <tr>
-        <td class="col-sm-1">{{ dish.likes }}</td>
-        <td><a href="{% url 'detail' dish.pk %}">{{ dish.name }}</a></td>
-        
-    </tr>
-    {% endfor %}
-</table>
+<div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>Likes</th>
+            <th>Name</th>
+            <th>Chef</th>
+        </tr>
+        {% for dish in dishes %}
+        <tr>
+            <td class="col-sm-2">{{ dish.likes }}</td>
+            <td class="col-sm-4"><a href="{% url 'detail' dish.pk %}">{{ dish.name }}</a></td>
+            <td class="col-sm-4">{{ dish.author }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}
