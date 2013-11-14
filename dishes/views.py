@@ -1,6 +1,13 @@
+import os
+from datetime import datetime
+from time import strftime
+
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
+from boto.s3.key import Key
+from boto import connect_s3
 
+import Recipes.settings.base as settings
 from .models import Dish, Ingredient
 from .forms import DishForm
 

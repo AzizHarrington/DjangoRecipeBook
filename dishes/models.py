@@ -1,11 +1,13 @@
-from time import time
+from datetime import datetime
+from time import strftime
 
 from django.db import models
 from django.contrib.auth.models import User 
 
 
 def get_upload_file_name(instance, filename):
-    return "uploaded/%s_%s" % (str(time()).replace('.', '_'), filename)
+    return "media/uploaded/" + datetime.now().strftime("%Y%m%d%H%M%S%f")\
+                        + filename
 
 
 class Ingredient(models.Model):
