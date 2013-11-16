@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.contrib import auth
+from django.contrib.auth.views import password_reset, password_reset_confirm
+from django.contrib.sites.models import get_current_site
 
 from .forms import RegistrationForm
 
@@ -47,3 +49,16 @@ def register_user(request):
 
 def register_success(request):
     return render(request, 'register_success.html')
+
+
+def reset_confirm(request, uidb36=None, token=None):
+    return password_reset_confirm(request, template_name="password_reset_confirm.html",
+        uidb36=uidb36, token=token, domain=get_current_site(), 
+        post_reset_redirect=reverse('login'))
+
+
+def reset(request):
+    return password_reset(request, template_name='password_reset_form.html',
+        email_template_name='password_reset_email.html',
+        subject_template_name='password_reset_subject.txt',
+        post_reset_redirect=reverse('login'))

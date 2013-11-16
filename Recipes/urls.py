@@ -19,7 +19,6 @@ urlpatterns = patterns('',
     url(r'^$', home, name="home"), 
     url(r'^recipes/', include('dishes.urls')),
     url(r'^accounts/', include('accounts.urls')),
-    # url(r'^accounts/', include('django.contrib.auth.urls')),
 )
 
 if settings.DEBUG:

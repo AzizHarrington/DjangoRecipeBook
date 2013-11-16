@@ -8,4 +8,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'accounts.views.logout', name='logout'),
     url(r'^register/$', 'accounts.views.register_user', name='register'),
     url(r'^success/$', 'accounts.views.register_success', name='success'),
+    url(r'^reset/confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$',
+            'accounts.views.reset_confirm', name='reset_confirm'),
+    url(r'^reset/$', 'accounts.views.reset', name='reset'),
 )

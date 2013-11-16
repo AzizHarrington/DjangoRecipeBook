@@ -14,6 +14,15 @@ ADMINS = (
     ("Aziz Harrington", "azizharrington@gmail.com"),
 )
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'azizharrington@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
+
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -84,7 +93,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'q8$tng-u77oawxbif#pw_p5d4e@+rmzb@v-aiuue$@ssq_m*dv'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
