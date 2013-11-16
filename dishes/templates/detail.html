@@ -1,7 +1,7 @@
 {% extends "detail_base.html" %}
 
 {% block extra_options %}
-{% if user.is_authenticated %}
+{% if user.is_authenticated and dish.author.username == user.username %}
     <p><a href="{% url 'edit' dish.pk %}">Edit</a> | <a href="{% url 'delete' dish.pk %}">Delete this recipe</a></p>
 {% endif %}
 {% endblock %}

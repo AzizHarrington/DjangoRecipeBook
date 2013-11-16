@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<p><a href="{% url 'detail' dish.pk %}">back to recipe</a></p>
 
 <h2>Edit {{ dish.name }}</h2>
 

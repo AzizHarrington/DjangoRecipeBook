@@ -3,6 +3,11 @@
 {% block content %}
 
     <h2>Hi {{ username }}, you are now logged in!</h2>
+    <br>
+    <br>
+    <br>
+    <p>Click <a href="{% url 'list' %}">here</a> to see new recipes</p>
+    <br>
     <p>Click <a href="{% url 'logout' %}">here</a> to logout.</p>
 
 {% endblock %}

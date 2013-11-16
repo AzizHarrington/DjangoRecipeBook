@@ -22,7 +22,7 @@ class Ingredient(models.Model):
 
 class Dish(models.Model):
     name = models.CharField(max_length=200)
-    author = models.ForeignKey(User, null=True)
+    author = models.ForeignKey(User)
     photo = models.FileField(upload_to=get_upload_file_name, null=True, blank=True)
     cuisine = models.CharField(max_length=200)
     flavors = models.CharField(max_length=200)
@@ -35,6 +35,3 @@ class Dish(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    class Meta:
-        ordering = ('-likes',)

@@ -3,23 +3,33 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-<h2>My Recipes</h2>
+<h2>Recent Recipes</h2>
 <p><a href="{% url 'new' %}">Create New</a></p>
 <hr>
-<div class="table-responsive">
-    <table class="table table-hover table-bordered">
-        <tr>
-            <th>Likes</th>
-            <th>Name</th>
-            <th>Chef</th>
-        </tr>
-        {% for dish in dishes %}
-        <tr>
-            <td class="col-sm-2">{{ dish.likes }}</td>
-            <td class="col-sm-4"><a href="{% url 'detail' dish.pk %}">{{ dish.name }}</a></td>
-            <td class="col-sm-4">{{ dish.author }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+
+{% for dish in dishes reversed %}
+<div class="new-recipes">
+    <h2><a href="{% url 'detail' dish.pk %}">{{ dish.name }}</a></h2>
+    {% if dish.photo %}
+        <p><a href="{% url 'detail' dish.pk %}"><img src="{{ STATIC_URL }}{{ dish.photo }}" alt="{{ dish.name }}" class="img-rounded" width="500"/></a></p>
+    {% endif %}
+    <p>Chef {{ dish.author }} | {{ dish.likes }} 
+        {% if dish.likes == 1 %}
+            person liked this recipe
+        {% else %}
+            people liked this recipe
+        {% endif %}
+    </p>
 </div>
+{% endfor %}
 {% endblock %}
+<div>
+    <h2>{{ dish.name }}</h2>
+    <hr>
+    {% if dish.photo %}
+        <p><img src="{{ STATIC_URL }}{{ dish.photo }}" alt="{{ dish.name }}" class="img-rounded" width="500"/></p>
+    {% endif %}
+    <p>Created by {{ dish.author }}</p>
+
+    <p>{{ dish.likes }} people liked this recipe</p>
+</div>
