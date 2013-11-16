@@ -11,7 +11,7 @@
 <div class="new-recipes">
     <h2><a href="{% url 'detail' dish.pk %}">{{ dish.name }}</a></h2>
     {% if dish.photo %}
-        <p><a href="{% url 'detail' dish.pk %}"><img src="{{ STATIC_URL }}{{ dish.photo }}" alt="{{ dish.name }}" class="img-rounded" width="500"/></a></p>
+        <p><a href="{% url 'detail' dish.pk %}"><img src="{{ STATIC_URL }}{{ dish.photo }}" alt="{{ dish.name }}" class="img-rounded img-responsive" width="500"/></a></p>
     {% endif %}
     <p>Chef {{ dish.author }} | {{ dish.likes }} 
         {% if dish.likes == 1 %}
@@ -21,6 +21,7 @@
         {% endif %}
     </p>
 </div>
+<hr>
 {% endfor %}
 {% endblock %}
 <div>

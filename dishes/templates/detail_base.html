@@ -7,7 +7,7 @@
     <h2>{{ dish.name }}</h2>
     <hr>
     {% if dish.photo %}
-        <p><img src="{{ STATIC_URL }}{{ dish.photo }}" alt="{{ dish.name }}" class="img-rounded" width="300"/></p>
+        <p><img src="{{ STATIC_URL }}{{ dish.photo }}" alt="{{ dish.name }}" class="img-rounded img-responsive" width="300"/></p>
     {% endif %}
     <p>Chef {{ dish.author }}</p>
     <p>
